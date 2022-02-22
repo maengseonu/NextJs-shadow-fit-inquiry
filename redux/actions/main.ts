@@ -1,12 +1,5 @@
 import * as t from "../types";
 
-export const setInfo = (name: string) => (dispatch: any) => {
-  dispatch({
-    type: t.SET_NAME, // 타입 스크립트
-    payload: name, // 전송되는 데이터
-  });
-};
-
 export const postSave = (inputData: {
   postId: number;
   postCreatedAt: number;

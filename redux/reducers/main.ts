@@ -1,70 +1,47 @@
 import { AnyAction } from "redux";
 import * as t from "../types";
 
-export const main = (
-  state = {
-    name: "guest",
-  },
-  action: AnyAction
+// export const initialState = {
+//   posts: [
+//     {
+//       postId: 1,
+//       postCreatedAt: 1,
+//       postTitle: "테스트 제목",
+//       postContent: "테스트 내용",
+//     },
+//   ],
+//   lastId: 5,
+//   selectRowData: {},
+// };
+
+export const save_post = () => ({
+  type: t.SAVE_POST,
+});
+
+type PostAction = ReturnType<typeof save_post>;
+
+type postState = {
+  postId: number;
+  postCreatedAt: number;
+  postTitle: string;
+  postContent: string;
+};
+
+const initialState: postState = {
+  postId: 1,
+  postCreatedAt: 1,
+  postTitle: "테스트 제목",
+  postContent: "테스트 내용",
+};
+
+export const postReducer = (
+  state: postState = initialState,
+  action: PostAction
 ) => {
   switch (action.type) {
-    case t.SET_NAME:
-      return {
-        ...state,
-        name: action.payload,
-      };
-    default:
-      return { ...state };
-  }
-};
-
-export const initialState = {
-  posts: [
-    {
-      postId: 1,
-      postCreatedAt: 1,
-      postTitle: "",
-      postContent: "",
-    },
-  ],
-  lastId: 1,
-  selectRowData: {},
-};
-
-export const postReducer = (state = initialState, action: AnyAction) => {
-  switch (action.type) {
-    case t.DELETE_POST:
-      return {
-        ...state,
-        posts: state.posts.filter((row) => row.postId !== action.postid),
-      };
     case t.SAVE_POST:
-      if (action.inputData.postId === "") {
-        return {
-          lastId: state.lastId + 1,
-          posts: state.posts.concat({
-            ...action.inputData,
-            postId: state.lastId + 1,
-          }),
-          selectRowData: {},
-        };
-      } else {
-        return {
-          ...state,
-          posts: state.posts.map((data) =>
-            data.postId === action.inputData.postId
-              ? { ...action.inputData }
-              : data
-          ),
-          selectRowData: {},
-        };
-      }
-    case t.SELECT_POST:
-      return {
-        ...state,
-        selectRowData: state.posts.find((row) => row.postId === action.postId),
-      };
+      return { postTitle: state.postTitle + "aa" };
     default:
-      return { ...state };
+      return { state };
   }
 };
