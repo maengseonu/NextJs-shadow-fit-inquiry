@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import { Post } from "../redux/post";
 import PostItem from "./PostItem";

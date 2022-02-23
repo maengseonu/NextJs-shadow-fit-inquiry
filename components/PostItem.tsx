@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { CSSProperties } from "react";
 import { Post } from "../redux/post";
 
@@ -18,8 +20,13 @@ function PostItem({ post, onRemove }: PostItemProps) {
   };
 
   return (
-    <li>
-      <span>{post.title}</span>---<span>{post.text}</span>---
+    <li key={post.id}>
+      <Link href={`/${post.id}`}>
+        <a>
+          <span>{post.title}</span>
+        </a>
+      </Link>
+      <span> - </span>
       <span>{post.create}</span>
       <button onClick={handleRemove} style={removeStyle}>
         삭제
