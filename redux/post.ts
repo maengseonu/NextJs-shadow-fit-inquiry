@@ -7,11 +7,11 @@ const DELETE_POST = "post/DELETE_POST" as const;
 // Main
 let nextId = 1;
 
-export const addPost = (text: string) => ({
+export const addPost = (title: string) => ({
   type: SAVE_POST,
   payload: {
     id: nextId++,
-    text,
+    title,
   },
 });
 
@@ -21,12 +21,12 @@ export const removePost = (id: number) => ({
 });
 
 // 모든 액션 객체들에 대한 타입 준비
-type PostAction = ReturnType<typeof addPost> | ReturnType<typeof removePost>;
+// type PostAction = ReturnType<typeof addPost> | ReturnType<typeof removePost>;
 
 // 상태에서 사용 할 할 일 항목 데이터 타입 정의
 export type Post = {
   id: number;
-  text: string;
+  title: string;
 };
 
 // 이 모듈에서 관리할 상태는 Todo 객체로 이루어진 배열
@@ -42,7 +42,7 @@ function posts(state: PostState = initialState, action: AnyAction): PostState {
       return state.concat({
         // action.payload 객체 안의 값이 모두 유추됩니다.
         id: action.payload.id,
-        text: action.payload.text,
+        title: action.payload.title,
       });
     case DELETE_POST:
       // payload 가 number 인 것이 유추됩니다.

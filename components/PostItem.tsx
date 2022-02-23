@@ -19,7 +19,7 @@ function PostItem({ post, onRemove }: PostItemProps) {
 
   return (
     <li>
-      <span>{post.text}</span>
+      <span>{post.title}</span>
       <span onClick={handleRemove} style={removeStyle}>
         (X)
       </span>

@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 
 type PostInsertProps = {
-  onInsert: (text: string) => void;
+  onInsert: (title: string) => void;
 };
 
 function PostInsert({ onInsert }: PostInsertProps) {
