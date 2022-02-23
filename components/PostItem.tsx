@@ -19,10 +19,11 @@ function PostItem({ post, onRemove }: PostItemProps) {
 
   return (
     <li>
-      <span>{post.title}</span>
-      <span onClick={handleRemove} style={removeStyle}>
-        (X)
-      </span>
+      <span>{post.title}</span>---<span>{post.text}</span>---
+      <span>{post.create}</span>
+      <button onClick={handleRemove} style={removeStyle}>
+        삭제
+      </button>
     </li>
   );
 }

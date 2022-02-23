@@ -1,26 +1,38 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 
 type PostInsertProps = {
-  onInsert: (title: string) => void;
+  onInsert: (title: string, text: string) => void;
 };
 
 function PostInsert({ onInsert }: PostInsertProps) {
-  const [value, setValue] = useState("");
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
+  const [titleValue, setTitleValue] = useState("");
+  const [TextValue, setTextValue] = useState("");
+
+  const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
+    setTitleValue(e.target.value);
   };
+  const onChangeText = (e: ChangeEvent<HTMLInputElement>) => {
+    setTextValue(e.target.value);
+  };
+
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    onInsert(value);
-    setValue("");
+    onInsert(titleValue, TextValue);
+    setTitleValue("");
+    setTextValue("");
   };
 
   return (
     <form onSubmit={onSubmit}>
       <input
-        placeholder="할 일을 입력하세요."
-        value={value}
-        onChange={onChange}
+        placeholder="제목을 입력하세요"
+        value={titleValue}
+        onChange={onChangeTitle}
+      />
+      <input
+        placeholder="내용을 입력하세요"
+        value={TextValue}
+        onChange={onChangeText}
       />
       <button type="submit">등록</button>
     </form>

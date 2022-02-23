@@ -25,8 +25,8 @@ function PostApp() {
   const posts = useSelector((state: ReducerType) => state.posts);
   const dispatch = useDispatch();
 
-  const onInsert = (text: string) => {
-    dispatch(addPost(text));
+  const onInsert = (title: string, text: string) => {
+    dispatch(addPost(title, text));
   };
 
   const onRemove = (id: number) => {
