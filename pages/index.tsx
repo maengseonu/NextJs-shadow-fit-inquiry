@@ -1,19 +1,14 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import PostInsert from "../components/PostInsert";
 import PostList from "../components/PostList";
-import { addPost, removePost } from "../redux/post";
+import { removePost } from "../redux/post";
 import { ReducerType } from "../redux/rootReducer";
 import styled from "styled-components";
 import Link from "next/link";
 
 function PostApp() {
-  const posts = useSelector((state: ReducerType) => state.posts);
   const dispatch = useDispatch();
-
-  const onInsert = (title: string, text: string) => {
-    dispatch(addPost(title, text));
-  };
+  const posts = useSelector((state: ReducerType) => state.posts);
 
   const onRemove = (id: number) => {
     dispatch(removePost(id));
@@ -23,17 +18,18 @@ function PostApp() {
     <>
       <Container>
         <PageTitle>게시판</PageTitle>
-        <Link href="/AddPage">
+        <Link href="/add">
           <a>
             <AddPageBtn type="button" value="등록하기" />
           </a>
         </Link>
-        <PostInsert onInsert={onInsert} />
         <PostList posts={posts} onRemove={onRemove} />
       </Container>
     </>
   );
 }
+
+export default PostApp;
 
 export const Container = styled.div`
   display: flex;
@@ -55,5 +51,3 @@ const AddPageBtn = styled.input`
   height: 30px;
   cursor: pointer;
 `;
-
-export default PostApp;

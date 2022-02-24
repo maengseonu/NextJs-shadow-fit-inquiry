@@ -43,14 +43,14 @@ function posts(state: PostState = initialState, action: AnyAction): PostState {
   switch (action.type) {
     case SAVE_POST:
       return state.concat({
-        // action.payload 객체 안의 값이 모두 유추됩니다.
+        // action.payload 객체 안의 값이 모두 유추된다
         id: action.payload.id,
         create: action.payload.create,
         title: action.payload.title,
         text: action.payload.text,
       });
     case DELETE_POST:
-      // payload 가 number 인 것이 유추됩니다.
+      // payload 가 number 인 것이 유추된다
       return state.filter((post) => post.id !== action.id);
     default:
       return state;

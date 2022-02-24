@@ -9,12 +9,6 @@ type PostItemProps = {
 };
 
 function PostItem({ post, onRemove }: PostItemProps) {
-  // CSSProperties 는 style 객체의 타입입니다.
-  const removeStyle: CSSProperties = {
-    marginLeft: 8,
-    color: "red",
-  };
-
   async function deleteData() {
     try {
       const response = await axios.delete(
@@ -33,16 +27,14 @@ function PostItem({ post, onRemove }: PostItemProps) {
 
   return (
     <li key={post.id}>
-      <Link href={`/${post.id}`}>
+      <Link href={`/posts/${post.id}`}>
         <a>
           <span>{post.title}</span>
         </a>
       </Link>
       <span> - </span>
       <span>{post.create}</span>
-      <button onClick={handleRemove} style={removeStyle}>
-        삭제
-      </button>
+      <button onClick={handleRemove}>삭제</button>
     </li>
   );
 }

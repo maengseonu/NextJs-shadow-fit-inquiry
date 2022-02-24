@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Container, PageTitle } from ".";
+import { Container, PageTitle } from "..";
 
 interface IPostData {
   id: number;
@@ -45,6 +45,7 @@ export default function Detail() {
             <HomePageBtn type="button" value="목록"></HomePageBtn>
           </a>
         </Link>
+        {/* 여기에 삭제 버튼 */}
       </Container>
     </>
   );
@@ -64,7 +65,7 @@ const PostText = styled.div`
   margin-top: 50px;
 `;
 
-const HomePageBtn = styled.input`
+export const HomePageBtn = styled.input`
   margin-top: 10px;
   background-color: skyblue;
   border: none;

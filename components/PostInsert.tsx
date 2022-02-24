@@ -1,5 +1,7 @@
 import axios from "axios";
+import Link from "next/link";
 import React, { ChangeEvent, FormEvent, useState } from "react";
+import { HomePageBtn } from "../pages/posts/[id]";
 import { getToday, setID } from "./components";
 
 type PostInsertProps = {
@@ -34,7 +36,7 @@ function PostInsert({ onInsert }: PostInsertProps) {
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     onInsert(titleValue, textValue);
-    postData();
+
     setTitleValue("");
     setTextValue("");
   };
@@ -51,7 +53,18 @@ function PostInsert({ onInsert }: PostInsertProps) {
         value={textValue}
         onChange={onChangeText}
       />
-      <button type="submit">등록</button>
+      <Link href="/">
+        <a>
+          <button type="submit" onClick={() => postData()}>
+            등록
+          </button>
+        </a>
+      </Link>
+      <Link href="/">
+        <a>
+          <HomePageBtn type="button" value="목록"></HomePageBtn>
+        </a>
+      </Link>
     </form>
   );
 }
