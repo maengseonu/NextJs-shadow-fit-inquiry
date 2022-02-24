@@ -1,4 +1,6 @@
+import axios from "axios";
 import React, { ChangeEvent, FormEvent, useState } from "react";
+import { getToday, setID } from "./components";
 
 type PostInsertProps = {
   onInsert: (title: string, text: string) => void;
@@ -6,7 +8,7 @@ type PostInsertProps = {
 
 function PostInsert({ onInsert }: PostInsertProps) {
   const [titleValue, setTitleValue] = useState("");
-  const [TextValue, setTextValue] = useState("");
+  const [textValue, setTextValue] = useState("");
 
   const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setTitleValue(e.target.value);
@@ -15,9 +17,24 @@ function PostInsert({ onInsert }: PostInsertProps) {
     setTextValue(e.target.value);
   };
 
+  async function postData() {
+    try {
+      const response = await axios.post("http://localhost:8080/posts", {
+        id: setID(),
+        create: getToday(),
+        title: titleValue,
+        text: textValue,
+      });
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    onInsert(titleValue, TextValue);
+    onInsert(titleValue, textValue);
+    postData();
     setTitleValue("");
     setTextValue("");
   };
@@ -31,7 +48,7 @@ function PostInsert({ onInsert }: PostInsertProps) {
       />
       <input
         placeholder="내용을 입력하세요"
-        value={TextValue}
+        value={textValue}
         onChange={onChangeText}
       />
       <button type="submit">등록</button>

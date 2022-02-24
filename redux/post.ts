@@ -1,20 +1,15 @@
 import { AnyAction } from "@reduxjs/toolkit";
-import { title } from "process";
-import { getToday } from "../components/components";
+import { getToday, setID } from "../components/components";
 
 // 액션 타입 선언
 const SAVE_POST = "post/SAVE_POST" as const;
 const DELETE_POST = "post/DELETE_POST" as const;
-const SELECT_POST = "post/SELECT_POST" as const;
-
-// Main
-let nextId = 1;
 
 // 액션 생성 함수
 export const addPost = (title: string, text: string) => ({
   type: SAVE_POST,
   payload: {
-    id: nextId++,
+    id: setID(),
     create: getToday(),
     title,
     text,
@@ -23,12 +18,7 @@ export const addPost = (title: string, text: string) => ({
 
 export const removePost = (id: number) => ({
   type: DELETE_POST,
-  payload: id,
-});
-
-export const selectPost = (id: number) => ({
-  type: SELECT_POST,
-  payload: id,
+  id,
 });
 
 // 모든 액션 객체들에 대한 타입 준비
@@ -61,7 +51,7 @@ function posts(state: PostState = initialState, action: AnyAction): PostState {
       });
     case DELETE_POST:
       // payload 가 number 인 것이 유추됩니다.
-      return state.filter((post) => post.id !== action.payload);
+      return state.filter((post) => post.id !== action.id);
     default:
       return state;
   }

@@ -1,5 +1,5 @@
+import axios from "axios";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import React, { CSSProperties } from "react";
 import { Post } from "../redux/post";
 
@@ -15,7 +15,19 @@ function PostItem({ post, onRemove }: PostItemProps) {
     color: "red",
   };
 
+  async function deleteData() {
+    try {
+      const response = await axios.delete(
+        `http://localhost:8080/posts/${post.id}`
+      );
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const handleRemove = () => {
+    deleteData();
     onRemove(post.id);
   };
 
