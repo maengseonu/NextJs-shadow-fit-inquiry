@@ -7,12 +7,7 @@ import styled from "styled-components";
 import Link from "next/link";
 
 function PostApp() {
-  const dispatch = useDispatch();
   const posts = useSelector((state: ReducerType) => state.posts);
-
-  const onRemove = (id: number) => {
-    dispatch(removePost(id));
-  };
 
   return (
     <>
@@ -23,7 +18,7 @@ function PostApp() {
             <AddPageBtn type="button" value="등록하기" />
           </a>
         </Link>
-        <PostList posts={posts} onRemove={onRemove} />
+        <PostList posts={posts} />
       </Container>
     </>
   );
@@ -36,7 +31,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 500px;
+  height: 100%;
 `;
 
 export const PageTitle = styled.span`

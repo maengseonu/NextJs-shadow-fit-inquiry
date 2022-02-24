@@ -1,12 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useTable } from "react-table";
 import { Post } from "../redux/post";
 import PostItem from "./PostItem";
 
 type PostListProps = {
   posts: Post[];
-  onRemove: (id: number) => void;
 };
 
 interface IPostData {
@@ -16,7 +14,7 @@ interface IPostData {
   text: string;
 }
 
-function PostList({ posts, onRemove }: PostListProps) {
+function PostList({ posts }: PostListProps) {
   const [postsData, setPostsData] = useState<IPostData[]>([]);
 
   // db에서 데이터 가져오기
@@ -39,7 +37,7 @@ function PostList({ posts, onRemove }: PostListProps) {
   return (
     <ul>
       {postsData.map((post) => (
-        <PostItem post={post} onRemove={onRemove} key={post.id} />
+        <PostItem post={post} key={post.id} />
       ))}
     </ul>
   );

@@ -8,13 +8,7 @@ function AddPage() {
   const onInsert = (title: string, text: string) => {
     dispatch(addPost(title, text));
   };
-  return (
-    <>
-      <Container>
-        <PostInsert onInsert={onInsert} />
-      </Container>
-    </>
-  );
+  return <PostInsert onInsert={onInsert} />;
 }
 
 export default AddPage;

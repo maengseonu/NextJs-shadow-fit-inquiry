@@ -1,30 +1,12 @@
-import axios from "axios";
 import Link from "next/link";
-import React, { CSSProperties } from "react";
+import React from "react";
 import { Post } from "../redux/post";
 
 type PostItemProps = {
   post: Post;
-  onRemove: (id: number) => void;
 };
 
-function PostItem({ post, onRemove }: PostItemProps) {
-  async function deleteData() {
-    try {
-      const response = await axios.delete(
-        `http://localhost:8080/posts/${post.id}`
-      );
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  const handleRemove = () => {
-    deleteData();
-    onRemove(post.id);
-  };
-
+function PostItem({ post }: PostItemProps) {
   return (
     <li key={post.id}>
       <Link href={`/posts/${post.id}`}>
@@ -34,7 +16,6 @@ function PostItem({ post, onRemove }: PostItemProps) {
       </Link>
       <span> - </span>
       <span>{post.create}</span>
-      <button onClick={handleRemove}>삭제</button>
     </li>
   );
 }
