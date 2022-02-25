@@ -11,22 +11,24 @@ interface IPostData {
 }
 
 export default function Edit() {
-  const [editData, setEditData]: any = useState();
+  const [editTitle, setEditTitle]: any = useState();
+  const [editText, setEditText]: any = useState();
   const router = useRouter();
   const editId = router.query.id;
 
   const onChangeEditTitle = (e: ChangeEvent<HTMLInputElement>) => {
-    setEditData(e.target.value);
+    setEditTitle(e.target.value);
   };
   const onChangeEditText = (e: ChangeEvent<HTMLInputElement>) => {
-    setEditData(e.target.value);
+    setEditText(e.target.value);
   };
 
   async function getResult() {
     try {
       const result = await axios.get(`http://localhost:8080/posts/${editId}`);
       console.log(result.data);
-      setEditData(result.data);
+      setEditTitle(result.data.title);
+      setEditText(result.data.text);
     } catch (error) {
       console.log(error);
     }
@@ -34,10 +36,9 @@ export default function Edit() {
 
   async function putData() {
     try {
-      const put = await axios.put(`http://localhost:8080/posts/${editId}`, {
-        create: editData.create,
-        title: editData.title,
-        text: editData.text,
+      const put = await axios.patch(`http://localhost:8080/posts/${editId}`, {
+        title: editTitle,
+        text: editText,
       });
       console.log(put);
     } catch (error) {
@@ -63,13 +64,13 @@ export default function Edit() {
           type="text"
           name="title"
           onChange={onChangeEditTitle}
-          value={editData?.title}
+          value={editTitle}
         ></input>
         <input
           type="text"
           name="text"
           onChange={onChangeEditText}
-          value={editData?.text}
+          value={editText}
         ></input>
         <input type="submit" onClick={onClickEdit} />
       </Container>
