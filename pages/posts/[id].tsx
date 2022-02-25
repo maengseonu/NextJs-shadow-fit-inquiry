@@ -55,8 +55,13 @@ export default function Detail() {
   }
 
   const handleRemove = () => {
-    deleteData();
-    onRemove(detailId);
+    if (window.confirm("삭제하시겠습니까?")) {
+      deleteData();
+      onRemove(detailId);
+      router.push("/");
+      alert("삭제되었습니다");
+    } else {
+    }
   };
 
   useEffect(() => {
@@ -75,11 +80,9 @@ export default function Detail() {
               <HomePageBtn type="button" value="목록"></HomePageBtn>
             </a>
           </Link>
-          <Link href="/">
-            <a>
-              <HomePageBtn type="button" value="삭제" onClick={handleRemove} />
-            </a>
-          </Link>
+
+          <HomePageBtn type="button" value="삭제" onClick={handleRemove} />
+
           <HomePageBtn
             type="button"
             value="수정"

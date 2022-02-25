@@ -21,7 +21,7 @@ function PostList({ posts }: PostListProps) {
   async function getResult() {
     try {
       const result = await axios.get("http://localhost:8080/posts");
-      console.log(result.data);
+      console.log(`PostListAxios.get : ${result.data}`);
       setPostsData(result.data);
     } catch (error) {
       console.log(error);

@@ -48,8 +48,11 @@ export default function Edit() {
 
   // 수정 누르면 데이터 업데이트하고 상세페이지로
   const onClickEdit = () => {
-    putData();
-    router.push(`/posts/${editId}`);
+    if (window.confirm("수정하시겠습니까?")) {
+      putData();
+      router.push(`/posts/${editId}`);
+    } else {
+    }
   };
 
   useEffect(() => {
