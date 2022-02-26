@@ -1,7 +1,6 @@
 import { useDispatch } from "react-redux";
-import { Container } from ".";
 import PostInsert from "../components/PostInsert";
-import { addPost } from "../redux/post";
+import { addPost } from "../redux/actions/posts";
 
 function AddPage() {
   const dispatch = useDispatch();

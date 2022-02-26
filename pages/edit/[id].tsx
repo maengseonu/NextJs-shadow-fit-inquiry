@@ -1,7 +1,22 @@
 import axios from "axios";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Container, PageTitle } from "..";
+import {
+  BtnContainer,
+  EditBtn,
+  HomePageBtn,
+} from "../../components/styles/BtnStyles";
+import {
+  FormContainer,
+  FormLabel,
+  FormRow,
+  FormTextInput,
+  FormTitleInput,
+  InputDiv,
+  LabelDiv,
+} from "../../components/styles/InputStyle";
 
 interface IPostData {
   id: number;
@@ -19,14 +34,14 @@ export default function Edit() {
   const onChangeEditTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setEditTitle(e.target.value);
   };
-  const onChangeEditText = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChangeEditText = (e: any) => {
     setEditText(e.target.value);
   };
 
   async function getResult() {
     try {
       const result = await axios.get(`http://localhost:8080/posts/${editId}`);
-      console.log(result.data);
+
       setEditTitle(result.data.title);
       setEditText(result.data.text);
     } catch (error) {
@@ -47,7 +62,7 @@ export default function Edit() {
   }
 
   // 수정 누르면 데이터 업데이트하고 상세페이지로
-  const onClickEdit = () => {
+  const onSubmitEdit = () => {
     if (window.confirm("수정하시겠습니까?")) {
       putData();
       router.push(`/posts/${editId}`);
@@ -62,20 +77,46 @@ export default function Edit() {
   return (
     <>
       <Container>
-        <PageTitle>수정</PageTitle>
-        <input
-          type="text"
-          name="title"
-          onChange={onChangeEditTitle}
-          value={editTitle}
-        ></input>
-        <input
-          type="text"
-          name="text"
-          onChange={onChangeEditText}
-          value={editText}
-        ></input>
-        <input type="submit" onClick={onClickEdit} />
+        <PageTitle>게시글 수정</PageTitle>
+        <FormContainer>
+          <form>
+            <FormRow>
+              <LabelDiv>
+                <FormLabel>제목</FormLabel>
+              </LabelDiv>
+              <InputDiv>
+                <FormTitleInput
+                  required
+                  maxLength={10}
+                  name="title"
+                  onChange={onChangeEditTitle}
+                  value={editTitle}
+                />
+              </InputDiv>
+            </FormRow>
+            <FormRow>
+              <LabelDiv>
+                <FormLabel>내용</FormLabel>
+              </LabelDiv>
+              <InputDiv>
+                <FormTextInput
+                  required
+                  name="text"
+                  value={editText}
+                  onChange={onChangeEditText}
+                />
+              </InputDiv>
+            </FormRow>
+            <BtnContainer>
+              <Link href={`/posts/${editId}`}>
+                <a>
+                  <HomePageBtn type="button" value="목록" />
+                </a>
+              </Link>
+              <EditBtn type="button" value="수정" onClick={onSubmitEdit} />
+            </BtnContainer>
+          </form>
+        </FormContainer>
       </Container>
     </>
   );

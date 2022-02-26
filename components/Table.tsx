@@ -1,30 +1,27 @@
+/* eslint-disable @next/next/link-passhref */
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/jsx-key */
-import axios from "axios";
-import { useEffect, useMemo, useState } from "react";
-import { UseSortByColumnOptions, useTable } from "react-table";
-
-interface IData {
-  id: string;
-  create: string;
-  title: string;
-  text: string;
-}
+import Link from "next/link";
+import { useMemo } from "react";
+import { useTable } from "react-table";
+import styled from "styled-components";
+import { Ttd, Tth, Ttr } from "./TableStyle";
 
 const Table = ({ serverData, posts }: any) => {
-  //   console.log(serverData);
-  //   console.log(columnData);
-
   const data: any = useMemo(() => serverData, []);
 
   const columns: any = useMemo(
     () => [
       {
+        Header: "고유번호",
+        accessor: "id",
+      },
+      {
         Header: "제목",
         accessor: "title",
       },
       {
-        Header: "날짜",
+        Header: "작성일",
         accessor: "create",
       },
     ],
@@ -39,39 +36,15 @@ const Table = ({ serverData, posts }: any) => {
       data,
     });
 
-  // db에서 데이터 가져오기
-  //   async function getResult() {
-  //     try {
-  //       const result = await axios.get("http://localhost:8080/posts");
-  //       //   console.log(result.data);
-  //       setPostsData(result.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-
-  //   useEffect(() => {
-  //     getResult();
-  //   }, []);
+  //   const firstPageRows = rows.slice(0, 10);
 
   return (
-    // <div>안녕</div>
-    <table {...getTableProps()} style={{ border: "solid 1px blue" }}>
+    <table {...getTableProps()}>
       <thead>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column) => (
-              <th
-                {...column.getHeaderProps()}
-                style={{
-                  borderBottom: "solid 3px red",
-                  background: "aliceblue",
-                  color: "black",
-                  fontWeight: "bold",
-                }}
-              >
-                {column.render("Header")}
-              </th>
+              <Tth {...column.getHeaderProps()}>{column.render("Header")}</Tth>
             ))}
           </tr>
         ))}
@@ -81,22 +54,15 @@ const Table = ({ serverData, posts }: any) => {
         {rows.map((row) => {
           prepareRow(row);
           return (
-            <tr {...row.getRowProps()}>
+            <Ttr {...row.getRowProps()}>
               {row.cells.map((cell) => {
                 return (
-                  <td
-                    {...cell.getCellProps()}
-                    style={{
-                      padding: "10px",
-                      border: "solid 1px gray",
-                      background: "papayawhip",
-                    }}
-                  >
-                    {cell.render("Cell")}
-                  </td>
+                  <Link href={`posts/${row.values.id}`}>
+                    <Ttd {...cell.getCellProps()}>{cell.render("Cell")}</Ttd>
+                  </Link>
                 );
               })}
-            </tr>
+            </Ttr>
           );
         })}
       </tbody>

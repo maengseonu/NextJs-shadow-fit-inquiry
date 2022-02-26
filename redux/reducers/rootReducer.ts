@@ -1,9 +1,11 @@
 import { combineReducers } from "redux";
-import posts from "./post";
+import posts from "./posts";
+import loading from "./loading";
 
 // rootReducer
 const rootReducer = combineReducers({
   posts,
+  loading,
 });
 
 // 루트 리듀서의 반환값를 유추

@@ -1,9 +1,9 @@
 import Link from "next/link";
 import React from "react";
-import { Post } from "../redux/post";
+import { IPost } from "../redux/types";
 
 type PostItemProps = {
-  post: Post;
+  post: IPost;
 };
 
 function PostItem({ post }: PostItemProps) {

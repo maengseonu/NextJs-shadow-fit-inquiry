@@ -1,10 +1,18 @@
 import axios from "axios";
 import Link from "next/link";
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import styled from "styled-components";
 import { Container, PageTitle } from "../pages";
-import { HomePageBtn } from "../pages/posts/[id]";
 import { getToday, setID } from "./components";
+import { AddBtn, BtnContainer, HomePageBtn } from "./styles/BtnStyles";
+import {
+  FormContainer,
+  FormLabel,
+  FormRow,
+  FormTextInput,
+  FormTitleInput,
+  InputDiv,
+  LabelDiv,
+} from "./styles/InputStyle";
 
 type PostInsertProps = {
   onInsert: (title: string, text: string) => void;
@@ -17,7 +25,7 @@ function PostInsert({ onInsert }: PostInsertProps) {
   const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setTitleValue(e.target.value);
   };
-  const onChangeText = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChangeText = (e: any) => {
     setTextValue(e.target.value);
   };
 
@@ -48,49 +56,47 @@ function PostInsert({ onInsert }: PostInsertProps) {
   return (
     <Container>
       <PageTitle>게시글 작성</PageTitle>
-      <form onSubmit={onSubmit}>
-        <Form>
-          <input
-            required
-            placeholder="제목을 입력하세요"
-            value={titleValue}
-            onChange={onChangeTitle}
-          />
-          <input
-            required
-            placeholder="내용을 입력하세요"
-            value={textValue}
-            onChange={onChangeText}
-          />
+      <FormContainer>
+        <form onSubmit={onSubmit}>
+          <FormRow>
+            <LabelDiv>
+              <FormLabel>제목</FormLabel>
+            </LabelDiv>
+            <InputDiv>
+              <FormTitleInput
+                maxLength={10}
+                required
+                placeholder="제목을 입력하세요"
+                value={titleValue}
+                onChange={onChangeTitle}
+              />
+            </InputDiv>
+          </FormRow>
+          <FormRow>
+            <LabelDiv>
+              <FormLabel>내용</FormLabel>
+            </LabelDiv>
+            <InputDiv>
+              <FormTextInput
+                required
+                placeholder="내용을 입력하세요"
+                value={textValue}
+                onChange={onChangeText}
+              />
+            </InputDiv>
+          </FormRow>
           <BtnContainer>
             <Link href="/">
               <a>
                 <HomePageBtn type="button" value="목록" />
               </a>
             </Link>
-            <HomePageBtn
-              type="submit"
-              value="등록"
-              onClick={() => postData()}
-            />
+            <AddBtn type="submit" value="등록" onClick={() => postData()} />
           </BtnContainer>
-        </Form>
-      </form>
+        </form>
+      </FormContainer>
     </Container>
   );
 }
 
 export default PostInsert;
-
-const Form = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const BtnContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-`;

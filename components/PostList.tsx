@@ -1,10 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Post } from "../redux/post";
+import { IPost } from "../redux/types";
 import PostItem from "./PostItem";
 
 type PostListProps = {
-  posts: Post[];
+  posts: IPost[];
 };
 
 interface IPostData {
