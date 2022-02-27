@@ -5,9 +5,11 @@ import Link from "next/link";
 import { useMemo } from "react";
 import { useTable } from "react-table";
 import styled from "styled-components";
+import { IPostData } from "../pages/posts/[id]";
+import { IPostState } from "../redux/types";
 import { Ttd, Tth, Ttr } from "./TableStyle";
 
-const Table = ({ serverData, posts }: any) => {
+const Table = ({ serverData }: any) => {
   const data: any = useMemo(() => serverData, []);
 
   const columns: any = useMemo(

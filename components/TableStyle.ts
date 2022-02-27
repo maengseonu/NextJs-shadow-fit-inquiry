@@ -8,12 +8,13 @@ export const Ttable = styled.table`
 
 export const Tth = styled.td`
   border: 1px solid #ddd;
+  width: 180px;
   padding: 8px;
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
-  background-color: #04aa6d;
-  color: white;
+  background-color: #ececec;
+  color: black;
 `;
 
 export const Ttd = styled.th`

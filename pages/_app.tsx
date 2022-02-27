@@ -1,14 +1,20 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import wrapper from "../redux/store";
-import LoadingComponent from "../components/common/LoadingComponent";
+import NextNProgress from "nextjs-progressbar";
+import Login from "./login";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <div>
-        <Component {...pageProps} />
-      </div>
+      <NextNProgress
+        color="#29D"
+        startPosition={0.3}
+        stopDelayMs={200}
+        height={3}
+        showOnShallow={true}
+      />
+      <Component {...pageProps} />
     </>
   );
 }

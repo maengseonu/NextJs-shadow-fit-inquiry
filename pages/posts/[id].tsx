@@ -14,7 +14,7 @@ import {
 } from "../../components/styles/BtnStyles";
 import { removePost } from "../../redux/actions/posts";
 
-interface IPostData {
+export interface IPostData {
   id: number;
   create: string;
   title: string;
@@ -25,23 +25,23 @@ export default function Detail({ detailData }: any) {
   const [postData, setPostData] = useState<IPostData>();
   const router = useRouter();
   const dispatch = useDispatch();
-  const detailId = router.query.id; // 이 아이디와 일치하는 데이터를 get해서 가져온다
-  console.log(router);
+  const detailId = detailData.id; // 이 아이디와 일치하는 데이터를 get해서 가져온다
+  console.log(detailId);
 
-  // 수정 누르면 현재 url id값의 수정페이지로 이동
+  // 현재 url id값의 수정페이지로 이동
   const onClickEdit = (id: any) => {
     router.push(`/edit/${id}`);
   };
 
+  // 현재 url id값과 일치하는 스테이트 게시글 삭제
   const onRemove = (id: any) => {
     dispatch(removePost(id));
   };
 
+  // 현재 url id값과 일치하는 db 게시글 삭제
   async function deleteData() {
     try {
-      const response = await axios.delete(
-        `http://localhost:8080/posts/${detailId}`
-      );
+      const response = await instance.delete(`posts/${detailId}`);
       console.log(response);
     } catch (error) {
       console.log(error);
@@ -86,6 +86,7 @@ export default function Detail({ detailData }: any) {
   );
 }
 
+// 현재 게시글의 데이터 받아오기
 export const getServerSideProps = async (context: any) => {
   try {
     const id = context.params.id;

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Container, PageTitle } from "..";
+import { instance } from "../../api";
 import {
   BtnContainer,
   EditBtn,
@@ -18,12 +19,12 @@ import {
   LabelDiv,
 } from "../../components/styles/InputStyle";
 
-interface IPostData {
-  id: number;
-  create: string;
-  title: string;
-  text: string;
-}
+// export interface IPostData {
+//   id: number;
+//   create: string;
+//   title: string;
+//   text: string;
+// }
 
 export default function Edit() {
   const [editTitle, setEditTitle]: any = useState();
@@ -38,10 +39,10 @@ export default function Edit() {
     setEditText(e.target.value);
   };
 
+  //  db 게시글 데이터 가져오기
   async function getResult() {
     try {
       const result = await axios.get(`http://localhost:8080/posts/${editId}`);
-
       setEditTitle(result.data.title);
       setEditText(result.data.text);
     } catch (error) {
@@ -49,6 +50,7 @@ export default function Edit() {
     }
   }
 
+  // db 게시글 데이터 업데이트
   async function putData() {
     try {
       const put = await axios.patch(`http://localhost:8080/posts/${editId}`, {
@@ -61,7 +63,7 @@ export default function Edit() {
     }
   }
 
-  // 수정 누르면 데이터 업데이트하고 상세페이지로
+  // 데이터 업데이트하고 상세페이지로
   const onSubmitEdit = () => {
     if (window.confirm("수정하시겠습니까?")) {
       putData();
@@ -72,7 +74,7 @@ export default function Edit() {
 
   useEffect(() => {
     getResult();
-  }, [router]);
+  }, []);
 
   return (
     <>
