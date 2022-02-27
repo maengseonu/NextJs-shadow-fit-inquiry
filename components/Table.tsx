@@ -4,7 +4,7 @@
 import Link from "next/link";
 import { useMemo } from "react";
 import { useTable } from "react-table";
-import { Ttd, Tth, Ttr } from "./TableStyle";
+import { Ttable, Ttd, Tth, Ttr } from "./styles/TableStyle";
 
 const Table = ({ serverData }: any) => {
   const data: any = useMemo(() => serverData, []);
@@ -16,7 +16,7 @@ const Table = ({ serverData }: any) => {
         accessor: "id",
       },
       {
-        Header: "제목",
+        Header: () => <p style={{ width: 500 }}>제목</p>,
         accessor: "title",
       },
       {
@@ -27,6 +27,8 @@ const Table = ({ serverData }: any) => {
     []
   );
 
+  // () => <p style={{ width: 500 }}>제목</p>
+
   // 무조건 columns, data 이름으로 사용해야한다
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({
@@ -36,7 +38,7 @@ const Table = ({ serverData }: any) => {
     });
 
   return (
-    <table {...getTableProps()}>
+    <Ttable {...getTableProps()}>
       <thead>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
@@ -46,7 +48,6 @@ const Table = ({ serverData }: any) => {
           </tr>
         ))}
       </thead>
-
       <tbody {...getTableBodyProps()}>
         {rows.map((row) => {
           prepareRow(row);
@@ -63,7 +64,7 @@ const Table = ({ serverData }: any) => {
           );
         })}
       </tbody>
-    </table>
+    </Ttable>
   );
 };
 

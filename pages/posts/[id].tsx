@@ -1,4 +1,3 @@
-import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -60,14 +59,19 @@ export default function Detail({ detailData }: any) {
 
   useEffect(() => {
     setPostData(detailData);
-  }, []);
+  }, [detailData]);
 
   return (
     <>
       <Container>
         <PageTitle>게시글</PageTitle>
-        <PostTitle>{postData?.title}</PostTitle>
-        <PostText>{postData?.text}</PostText>
+        <DetailContainer>
+          <Create>{postData?.create}</Create>
+          <PostName>제목</PostName>
+          <PostTitle>{postData?.title}</PostTitle>
+          <PostName>내용</PostName>
+          <PostText>{postData?.text}</PostText>
+        </DetailContainer>
         <BtnContainer>
           <Link href="/">
             <a>
@@ -103,24 +107,37 @@ export const getServerSideProps = async (context: any) => {
 };
 
 // 게시글 페이지 styles
+const PostName = styled.div`
+  width: 60%;
+  margin-top: 30px;
+  font-size: 20px;
+  font-weight: 1000;
+`;
+
+const Create = styled.span`
+  font-size: 20px;
+`;
+
 const PostTitle = styled.div`
-  width: 30%;
-  border: 1px solid gray;
-  margin-top: 50px;
-  font-size: 30px;
+  width: 60%;
+  border: 1px solid #ccc;
+  margin-top: 15px;
+  font-size: 25px;
   padding: 10px;
   border-radius: 5px;
+  background-color: white;
 `;
 
 const PostText = styled.p`
   padding: 10px;
-  border: 1px solid gray;
+  border: 1px solid #ccc;
   border-radius: 5px;
   height: 400px;
   overflow: auto;
-  width: 30%;
+  width: 60%;
+  background-color: white;
   word-wrap: break-word;
-  ::-webkit-scrollbar-thumb {
+  /* ::-webkit-scrollbar-thumb {
     border-radius: 5px;
     background-color: skyblue;
   }
@@ -130,6 +147,18 @@ const PostText = styled.p`
   }
   ::-webkit-scrollbar-track {
     background-color: #e4e4e4;
-    border-radius: 5px;
-  }
+    border-radius: 5px; */
+  /* } */
+`;
+
+export const DetailContainer = styled.div`
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 600px;
+  border-radius: 5px;
+  margin-top: 25px;
+  background-color: #f2f2f2;
 `;

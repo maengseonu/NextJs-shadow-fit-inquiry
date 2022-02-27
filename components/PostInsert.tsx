@@ -64,7 +64,7 @@ function PostInsert({ onInsert }: PostInsertProps) {
             </LabelDiv>
             <InputDiv>
               <FormTitleInput
-                maxLength={10}
+                maxLength={20}
                 required
                 placeholder="제목을 입력하세요"
                 value={titleValue}

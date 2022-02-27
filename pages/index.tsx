@@ -1,15 +1,11 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { ReducerType } from "../redux/reducers/rootReducer";
 import styled from "styled-components";
 import Link from "next/link";
 import Table from "../components/Table";
 import { instance } from "../api";
 import { AddPageBtn } from "../components/styles/BtnStyles";
 import { culturitRogo } from "../components/styles/ImgSrc";
-import Login, { oAuthURL } from "./login";
 import { useRouter } from "next/router";
-import Test from "./test";
 
 // 서버에서 미리 렌더링시 자동으로 호출되며 비동기 요청으로 불러온 외부 데이터를 컴포넌트 속성으로 전달
 export const getServerSideProps = async () => {

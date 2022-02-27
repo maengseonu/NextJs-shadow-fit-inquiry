@@ -1,4 +1,3 @@
-import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ChangeEvent, useEffect, useState } from "react";
@@ -42,7 +41,7 @@ export default function Edit() {
   //  db 게시글 데이터 가져오기
   async function getResult() {
     try {
-      const result = await axios.get(`http://localhost:8080/posts/${editId}`);
+      const result = await instance.get(`posts/${editId}`);
       setEditTitle(result.data.title);
       setEditText(result.data.text);
     } catch (error) {
@@ -53,7 +52,7 @@ export default function Edit() {
   // db 게시글 데이터 업데이트
   async function putData() {
     try {
-      const put = await axios.patch(`http://localhost:8080/posts/${editId}`, {
+      const put = await instance.patch(`posts/${editId}`, {
         title: editTitle,
         text: editText,
       });
@@ -89,7 +88,7 @@ export default function Edit() {
               <InputDiv>
                 <FormTitleInput
                   required
-                  maxLength={10}
+                  maxLength={20}
                   name="title"
                   onChange={onChangeEditTitle}
                   value={editTitle}

@@ -8,7 +8,6 @@ export const instance = axios.create({
 
 const API = () => {
   const dispatch = useDispatch();
-
   instance.interceptors.request.use(
     function (config) {
       // 로딩 호출

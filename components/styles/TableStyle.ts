@@ -2,25 +2,30 @@ import styled from "styled-components";
 
 export const Ttable = styled.table`
   font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
+  /* border-collapse: collapse; */
+  border-spacing: 0;
+  border: 1px solid #ececec;
+  border-radius: 5px;
 `;
 
 export const Tth = styled.td`
-  border: 1px solid #ddd;
-  width: 180px;
-  padding: 8px;
+  padding: 0.5rem;
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
   background-color: #ececec;
   color: black;
+  height: 5px;
+  margin: 0;
+  font-weight: 1000;
 `;
 
 export const Ttd = styled.th`
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
+  padding: 0.5rem;
+  text-align: center;
+  margin: 0;
+  border-bottom: 1px solid #ececec;
+  font-weight: 300;
 `;
 
 export const Ttr = styled.tr`
