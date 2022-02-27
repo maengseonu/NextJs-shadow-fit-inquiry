@@ -67,7 +67,7 @@ export default function Edit() {
   const onSubmitEdit = () => {
     if (window.confirm("수정하시겠습니까?")) {
       putData();
-      router.push(`/posts/${editId}`);
+      // router.push(`/posts/${editId}`);
     } else {
     }
   };
@@ -93,6 +93,7 @@ export default function Edit() {
                   name="title"
                   onChange={onChangeEditTitle}
                   value={editTitle}
+                  autoFocus
                 />
               </InputDiv>
             </FormRow>
@@ -115,7 +116,11 @@ export default function Edit() {
                   <HomePageBtn type="button" value="목록" />
                 </a>
               </Link>
-              <EditBtn type="button" value="수정" onClick={onSubmitEdit} />
+              <Link href={`/posts/${editId}`}>
+                <a>
+                  <EditBtn type="button" value="수정" onClick={onSubmitEdit} />
+                </a>
+              </Link>
             </BtnContainer>
           </form>
         </FormContainer>

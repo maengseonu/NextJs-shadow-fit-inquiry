@@ -9,6 +9,7 @@ import { AddPageBtn } from "../components/styles/BtnStyles";
 import { culturitRogo } from "../components/styles/ImgSrc";
 import Login, { oAuthURL } from "./login";
 import { useRouter } from "next/router";
+import Test from "./test";
 
 // 서버에서 미리 렌더링시 자동으로 호출되며 비동기 요청으로 불러온 외부 데이터를 컴포넌트 속성으로 전달
 export const getServerSideProps = async () => {
@@ -31,11 +32,11 @@ function PostApp({ serverData }: any) {
   return (
     <>
       <Container>
-        <Link href={oAuthURL}>
+        {/* <Link href={oAuthURL}>
           <a>
             <Login />
           </a>
-        </Link>
+        </Link> */}
         <div>
           <Logo src={culturitRogo} width={50} height={50} />
           <PageTitle>컬처릿 게시판</PageTitle>

@@ -69,6 +69,7 @@ function PostInsert({ onInsert }: PostInsertProps) {
                 placeholder="제목을 입력하세요"
                 value={titleValue}
                 onChange={onChangeTitle}
+                autoFocus
               />
             </InputDiv>
           </FormRow>
