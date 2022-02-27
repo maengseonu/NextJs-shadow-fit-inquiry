@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Container, PageTitle } from "..";
 import { instance } from "../../api";
+import Seo from "../../components/common/Seo";
 import {
   BtnContainer,
   DeleteBtn,
@@ -63,6 +64,7 @@ export default function Detail({ detailData }: any) {
 
   return (
     <>
+      <Seo title={postData?.title} />
       <Container>
         <PageTitle>게시글</PageTitle>
         <DetailContainer>

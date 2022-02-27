@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Container, PageTitle } from "..";
 import { instance } from "../../api";
+import Seo from "../../components/common/Seo";
 import {
   BtnContainer,
   EditBtn,
@@ -78,6 +79,7 @@ export default function Edit() {
   return (
     <>
       <Container>
+        <Seo title={`수정 | ${editTitle}`} />
         <PageTitle>게시글 수정</PageTitle>
         <FormContainer>
           <form>
